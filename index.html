@@ -2,18 +2,22 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>猫のおじさんの会議締めツール</title>
+    <title>ねこのおじさん絶対零度会議室</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    <h1>ねこのおじさん絶対零度会議室</h1>
     <div id="cat-area">
-        <img id="cat-img" src="images/cat1.jpg" alt="猫のおじさん">
-        <div id="message-box">会議を始めるぞ。時間を設定してくれ。</div>
+        <img id="cat-img" src="images/cat1.png" alt="猫のおじさん">
+        <div id="message-box">会議を始めるぞ。<br>時間を設定してくれ。</div>
     </div>
 
     <div class="timer-display" id="timer">00:00</div>
-    <div>
+    <div class="controls">
+        <button onclick="startTimer()">スタート</button>
+        <button onclick="resetTimer()">リセット</button>
+    </div>
+    <div class="time-settings">
         <button onclick="addTime(1)">+1分</button>
         <button onclick="addTime(5)">+5分</button>
         <button onclick="addTime(10)">+10分</button>
