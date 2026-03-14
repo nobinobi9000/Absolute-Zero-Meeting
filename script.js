@@ -5,9 +5,16 @@ const data = {
 };
 
 // 画像のファイル名リスト
-const catImages = ["cat1.jpg", "cat2.jpg"]; // imagesフォルダ内の画像名を指定
-
+const catImages = ["cat1.png", "cat2.png", "cat3.png", "cat4.png", "cat5.png"];
+const alarmSound = new Audio('alarm.mp3'); 
 let timeLeft = 0;
+let appData = { jokes: [], wisdom: [] };
+
+// JSONデータの読み込み
+fetch('data.json')
+    .then(response => response.json())
+    .then(data => { appData = data; })
+    .catch(err => console.error("データ読み込み失敗:", err));
 
 function addTime(min) {
     timeLeft += min * 60;
@@ -20,11 +27,11 @@ function updateDisplay() {
     document.getElementById('timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
-const alarmSound = new Audio('alarm.mp3'); 
-
 function speakRandom() {
+    if (appData.jokes.length === 0) return;
+    
     // セリフの決定
-    const all = [...data.jokes, ...data.wisdom];
+    const all = [...appData.jokes, ...appData.wisdom];
     const msg = all[Math.floor(Math.random() * all.length)];
     document.getElementById('message-box').innerText = msg;
     
@@ -33,7 +40,7 @@ function speakRandom() {
     document.getElementById('cat-img').src = "images/" + randomImg;
 
     // 音声を再生
-    alarmSound.play();
+    alarmSound.play().catch(e => console.log("音声再生待ちです"));
 }
 
 setInterval(() => {
