@@ -20,6 +20,8 @@ function updateDisplay() {
     document.getElementById('timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
+const alarmSound = new Audio('alarm.mp3'); 
+
 function speakRandom() {
     // セリフの決定
     const all = [...data.jokes, ...data.wisdom];
@@ -29,6 +31,9 @@ function speakRandom() {
     // 猫の画像の切り替え
     const randomImg = catImages[Math.floor(Math.random() * catImages.length)];
     document.getElementById('cat-img').src = "images/" + randomImg;
+
+    // 音声を再生
+    alarmSound.play();
 }
 
 setInterval(() => {
