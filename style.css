@@ -1,0 +1,7 @@
+/* style.css */
+body { text-align: center; font-family: sans-serif; background: #f4f4f9; padding: 20px; }
+#cat-area { margin: 20px auto; width: 300px; }
+#cat-img { width: 100%; border-radius: 10px; }
+#message-box { border: 2px solid #333; padding: 15px; border-radius: 10px; background: white; margin: 10px auto; min-height: 60px; max-width: 400px; }
+.timer-display { font-size: 3em; font-weight: bold; margin: 20px; color: #333; }
+button { padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; }
