@@ -2,20 +2,13 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>猫のおじさんの締めツール</title>
-    <style>
-        body { text-align: center; font-family: sans-serif; background: #f4f4f9; }
-        #cat-area { margin: 20px auto; width: 300px; }
-        #message-box { border: 2px solid #333; padding: 15px; border-radius: 10px; background: white; margin: 10px; min-height: 50px; }
-        .timer-display { font-size: 2em; font-weight: bold; margin: 10px; }
-        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
-    </style>
+    <title>猫のおじさんの会議締めツール</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="cat-area">
-        <img src="your-cat-image.jpg" alt="猫のおじさん" style="width: 100%;">
+        <img id="cat-img" src="images/cat1.jpg" alt="猫のおじさん">
         <div id="message-box">会議を始めるぞ。時間を設定してくれ。</div>
     </div>
 
@@ -30,39 +23,6 @@
     <br>
     <button onclick="speakRandom()">本日の終わりの一言</button>
 
-    <script>
-        const data = {
-            "jokes": ["布団がふっとんだ！", "アルミ缶の上にあるみかん。", "会議の結論？けつろん（ケツ論）は出ないな。"],
-            "wisdom": ["早寝早起きは、明日への一番の投資だぞ。", "聞くは一時の恥、聞かぬは一生の恥。"]
-        };
-
-        let timeLeft = 0;
-        let timerId = null;
-
-        function addTime(min) {
-            timeLeft += min * 60;
-            updateDisplay();
-        }
-
-        function updateDisplay() {
-            let m = Math.floor(timeLeft / 60);
-            let s = timeLeft % 60;
-            document.getElementById('timer').innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        }
-
-        function speakRandom() {
-            const all = [...data.jokes, ...data.wisdom];
-            const msg = all[Math.floor(Math.random() * all.length)];
-            document.getElementById('message-box').innerText = msg;
-        }
-
-        setInterval(() => {
-            if (timeLeft > 0) {
-                timeLeft--;
-                updateDisplay();
-                if (timeLeft === 0) speakRandom();
-            }
-        }, 1000);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
