@@ -27,6 +27,14 @@
     <br>
     <button onclick="speakRandom()">本日の終わりの一言</button>
 
+    <div id="result-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:100; text-align:center;">
+        <div style="margin-top: 50px; color: white;">
+            <img id="modal-cat-img" src="images/cat1.png" style="width: 300px; border-radius: 10px;">
+            <div id="modal-message" style="font-size: 1.5em; padding: 20px;"></div>
+            <button onclick="closeModal()" style="padding: 10px 20px;">閉じる</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
