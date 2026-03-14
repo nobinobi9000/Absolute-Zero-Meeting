@@ -4,7 +4,7 @@ const jokeSound = new Audio('joke.mp3');
 const wisdomSound = new Audio('wisdom.mp3');
 
 let timeLeft = 0;
-let timerId = null; // ここで定義！
+let timerId = null;
 let appData = { jokes: [], wisdom: [] };
 
 fetch('./data.json')
@@ -43,22 +43,32 @@ function resetTimer() {
     updateDisplay();
 }
 
-function speakRandom(isTimerEnd = false) {
-    // 割り込み優先：ボタン押下時はタイマーを止めずに表示だけ変える
-    if (isTimerEnd) {
-        alarmSound.play();
-    } else {
-        // 「終わりの一言」ボタン優先（タイマーは継続）
-        const isJoke = Math.random() < 0.8;
-        isJoke ? jokeSound.play() : wisdomSound.play();
-    }
+function showModal(msg, isJoke) {
+    const modal = document.getElementById('result-modal');
+    document.getElementById('modal-message').innerHTML = msg.replace(/\n/g, '<br>');
+    document.getElementById('modal-cat-img').src = "images/" + catImages[Math.floor(Math.random() * catImages.length)];
+    modal.style.display = 'block';
+}
 
+function closeModal() {
+    document.getElementById('result-modal').style.display = 'none';
+}
+
+function speakRandom(isTimerEnd = false) {
     if (appData.jokes.length === 0) return;
 
+    // 1. カテゴリを決定 (タイマー終了時は強制的にアラーム音用の判定にする等の調整も可能)
     const isJoke = Math.random() < 0.8;
     const category = isJoke ? "jokes" : "wisdom";
     const msg = appData[category][Math.floor(Math.random() * appData[category].length)];
     
-    document.getElementById('message-box').innerHTML = msg.replace(/\n/g, '<br>');
-    document.getElementById('cat-img').src = "images/" + catImages[Math.floor(Math.random() * catImages.length)];
+    // 2. 音声再生
+    if (isTimerEnd) {
+        alarmSound.play();
+    } else {
+        isJoke ? jokeSound.play() : wisdomSound.play();
+    }
+
+    // 3. モーダル表示
+    showModal(msg, isJoke);
 }
