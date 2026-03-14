@@ -65,3 +65,23 @@ setInterval(() => {
         }
     }
 }, 1000);
+
+function startTimer() {
+    if (timerId !== null || timeLeft <= 0) return;
+    timerId = setInterval(() => {
+        timeLeft--;
+        updateDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timerId);
+            timerId = null;
+            speakRandom(true);
+        }
+    }, 1000);
+}
+
+function resetTimer() {
+    clearInterval(timerId);
+    timerId = null;
+    timeLeft = 0;
+    updateDisplay();
+}
