@@ -56,21 +56,30 @@ button {
 #result-modal > div {
     background: white;
     margin: 10% auto;
-    padding: 20px;
+    padding: 30px;
     width: 90%;
-    max-width: 400px;
+    max-width: 600px;
     border-radius: 20px;
 }
 
 #modal-message {
-    font-size: 2em; /* 大きく強調 */
+    font-size: 2.2em; /* 大きく強調 */
     font-weight: bold;
-    padding: 15px 0;
+    padding: 20px 0;
+    line-height: 1.5;
     color: #333;
 }
 
 #modal-cat-img {
-    width: 80%;
-    max-width: 150px;
+    width: 100%;
+    max-width: 300px;
     height: auto;
+    margin-bottom: 20px;
+}
+
+/* 閉じるボタンも大きくする */
+#result-modal button {
+    font-size: 1.2em;
+    padding: 15px 40px;
+    margin-top: 20px;
 }
