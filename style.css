@@ -1,7 +1,66 @@
-/* style.css */
-body { text-align: center; font-family: sans-serif; background: #f4f4f9; padding: 20px; }
-#cat-area { margin: 20px auto; width: 300px; }
-#cat-img { width: 100%; border-radius: 10px; }
-#message-box { border: 2px solid #333; padding: 15px; border-radius: 10px; background: white; margin: 10px auto; min-height: 60px; max-width: 400px; }
-.timer-display { font-size: 3em; font-weight: bold; margin: 20px; color: #333; }
-button { padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; }
+/* スマホ・PC共通のベース設定 */
+body {
+    font-family: sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+/* ボタンを押しやすくする（タッチ領域の確保） */
+button {
+    font-size: 16px;
+    padding: 12px 20px;
+    margin: 5px;
+    border-radius: 8px;
+    border: none;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: #bbb;
+}
+
+/* タイマー表示 */
+.timer-display {
+    font-size: 3em;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* モーダルウィンドウ（スマホ全画面対応） */
+#result-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 100;
+}
+
+/* モーダルの中身（カードデザイン） */
+#result-modal > div {
+    background: white;
+    margin: 20% auto;
+    padding: 20px;
+    width: 85%;
+    max-width: 400px;
+    border-radius: 15px;
+}
+
+/* ご要望の文字サイズ調整 */
+#modal-message {
+    font-size: 2em;
+    font-weight: bold;
+    padding: 20px 0;
+    line-height: 1.4;
+    color: #333;
+}
+
+#modal-cat-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+}
