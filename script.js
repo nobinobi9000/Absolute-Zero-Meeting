@@ -1,4 +1,5 @@
-const catImages = ["cat1.png", "cat2.png", "cat3.png", "cat4.png", "cat5.png"];
+// 画像リスト（cat1は初期用、それ以外をランダム用にする）
+const catImages = ["cat1.png", "cat2.png", "cat3.png", "cat4.png", "cat5.png", "cat6.png", "cat7.png", "cat8.png", "cat9.png", "cat10.png", "cat11.png", "cat12.png"];
 const alarmSound = new Audio('alarm.mp3'); 
 const jokeSound = new Audio('joke.mp3');
 const wisdomSound = new Audio('wisdom.mp3');
@@ -7,10 +8,8 @@ let timeLeft = 0;
 let timerId = null;
 let appData = { jokes: [], wisdom: [] };
 
-fetch('./data.json')
-    .then(response => response.json())
-    .then(data => { appData = data; })
-    .catch(err => console.error("データ読み込み失敗:", err));
+// 読み込み
+fetch('./data.json').then(r => r.json()).then(d => appData = d);
 
 function addTime(min) {
     timeLeft += min * 60;
@@ -55,20 +54,29 @@ function closeModal() {
 }
 
 function speakRandom(isTimerEnd = false) {
-    if (appData.jokes.length === 0) return;
-
-    // 1. カテゴリを決定 (タイマー終了時は強制的にアラーム音用の判定にする等の調整も可能)
-    const isJoke = Math.random() < 0.8;
-    const category = isJoke ? "jokes" : "wisdom";
+// 1. 確率判定 (wisdomが8%)
+    const isWisdom = Math.random() < 0.08;
+    const category = isWisdom ? "wisdom" : "jokes";
     const msg = appData[category][Math.floor(Math.random() * appData[category].length)];
-    
-    // 2. 音声再生
+
+    // 2. 音の処理
     if (isTimerEnd) {
         alarmSound.play();
+        // 少し遅らせてセリフの音を鳴らす
+        setTimeout(() => { isWisdom ? wisdomSound.play() : jokeSound.play(); }, 1500);
     } else {
-        isJoke ? jokeSound.play() : wisdomSound.play();
+        isWisdom ? wisdomSound.play() : jokeSound.play();
     }
 
-    // 3. モーダル表示
-    showModal(msg, isJoke);
+    // 3. 表示 (モーダルを表示)
+    // ランダム画像は cat2.png ～ cat12.png から選ぶ
+    const randomImg = catImages[Math.floor(Math.random() * 11) + 1]; 
+    document.getElementById('modal-cat-img').src = "images/" + randomImg;
+    document.getElementById('modal-message').innerHTML = msg.replace(/\n/g, '<br>');
+    document.getElementById('result-modal').style.display = 'block';
 }
+
+// ページ読み込み時に cat1.png をセット
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('cat-img').src = "images/cat1.png";
+});
