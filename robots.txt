@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nobinobi9000.github.io/Absolute-Zero-Meeting/sitemap.xml
